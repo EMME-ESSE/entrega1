@@ -1,0 +1,38 @@
+{% extends 'app_entrega1/padre.html' %}
+
+{% load static %}
+{% block titulo %}
+  <h1>BASE DE DATOS DE PROVEEDORES</h1>
+  <h2>Guardar proveedores</h2>
+{% endblock %}
+{% block formulario_agregar %}
+<form action="{% url 'editar_venta' venta.venta_id %}" method="POST">{% csrf_token %}
+  {{ venta_id }}
+    <table>
+      {{ formulario.as_table }}
+    </table>
+    <input type="submit" value="enviar">
+</form>
+{% endblock %}
+
+{% block columnas %}
+<tr>
+  <th><h1>venta_id</h1></th>
+  <th><h1>fecha_venta </h1></th>
+  <th><h1>cantidad_venta</h1></th>
+  <th><h1>usuario_id</h1></th>
+  
+</tr>
+{% endblock %}
+
+{% block tabla %}
+{% for proveedor in all_proveedores %}
+<tr>
+  <td> {{ venta.venta_id }} </td>
+  <td> {{ venta.fecha_venta }} </td>
+  <td> {{ venta.cantidad_venta }} </td>
+  <td> {{ venta.usuario_id }} </td>
+   
+</tr>
+{% endfor %}
+{% endblock %}

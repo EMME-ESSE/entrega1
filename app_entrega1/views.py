@@ -103,3 +103,19 @@ def buscar_ventas(request):
     all_ventas = ventas.objects.all()
     return render(request, 'app_entrega1/buscar_ventas.html', {'all_ventas':all_ventas})
 
+#_-------------------------------------------------------------------------------------------------------------------------
+# "ACA HICE EL ELIMINAR Y NO ME SALIO" puse la url. y si ves la consola se ejecuta una orden pero no se eliminar el id
+def eliminar_ventas(request,venta_id):
+  venta=ventas.objects.get(venta_id=venta_id)
+  venta.delete()
+  all_ventas = ventas.objects.all()    
+  return render(request, 'app_entrega1/buscar_ventas.html', {'all_ventas':all_ventas })
+
+
+def editar_venta(request,venta_id):
+  venta=ventas.objects.get(venta_id=venta_id)
+  if request.method=="POST":
+    pass
+  else:
+      Formulario=ventas_formularios(initial={"venta_id ":venta.venta_id ,"fecha_venta":venta.fecha_venta,"cantidad_venta":venta.cantidad_venta,"usuario_id":venta.usuario_id})
+      return render(request, 'app_entrega1/editar_venta.html', {'formulario':Formulario,"venta":venta })

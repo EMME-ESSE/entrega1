@@ -33,7 +33,14 @@
    <td> {{ venta.fecha_venta }} </td>
    <td> {{ venta.cantidad_venta }} </td>
    <td> {{ venta.usuario_id }} </td>
+   {% comment "ESTA PARTE ESTUVE HACIENDO EL ELIMINAR Y NO ME SALIO" %}{% endcomment %}
+   <button>
+     <a href="{% url 'eliminar_ventas' venta.venta_id %}"  >Eliminar</a>
+     <a href="{% url 'eliminar_ventas' venta.venta_id %}"  >Editar</a>
+    </button>
    
 </tr>
 {% endfor %}
 {% endblock %}
+
+
