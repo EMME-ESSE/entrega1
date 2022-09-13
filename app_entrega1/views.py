@@ -115,7 +115,17 @@ def eliminar_ventas(request,venta_id):
 def editar_venta(request,venta_id):
   venta=ventas.objects.get(venta_id=venta_id)
   if request.method=="POST":
-    pass
+    Formulario=ventas_formularios(request.POST)
+    if ventas_formularios.is_valid():
+      info=ventas_formularios.cleaned_data
+      venta.venta_id=info["venta_id"]
+      venta.fecha_venta=info["fecha_venta"]
+      venta.cantidad_venta=info["cantidad_venta"]
+      venta.usuario_id=info["usuario_id"]
+      venta.save()
+      all_ventas = ventas.objects.all()
+      return render(request, 'app_entrega1/buscar_ventas.html', {'all_ventas':all_ventas })
+
   else:
-      Formulario=ventas_formularios(initial={"venta_id ":venta.venta_id ,"fecha_venta":venta.fecha_venta,"cantidad_venta":venta.cantidad_venta,"usuario_id":venta.usuario_id})
+      Formulario=ventas_formularios(initial={"venta_id":venta.venta_id ,"fecha_venta":venta.fecha_venta,"cantidad_venta":venta.cantidad_venta,"usuario_id":venta.usuario_id})
       return render(request, 'app_entrega1/editar_venta.html', {'formulario':Formulario,"venta":venta })
